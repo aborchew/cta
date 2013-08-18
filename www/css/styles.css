@@ -1,0 +1,72 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+@font-face {
+    font-family: 'ModernPictogramsNormal';
+    src: url('font/modernpics-webfont.eot');
+    src: url('font/modernpics-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/modernpics-webfont.woff') format('woff'),
+         url('font/modernpics-webfont.ttf') format('truetype'),
+         url('font/modernpics-webfont.svg#ModernPictogramsNormal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'WebSymbolsRegular';
+  src: url('font/WebSymbols-Regular-webfont.eot');
+  src: url('font/WebSymbols-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('font/WebSymbols-Regular-webfont.woff') format('woff'),
+       url('font/WebSymbols-Regular-webfont.ttf') format('truetype'),
+       url('font/WebSymbols-Regular-webfont.svg#WebSymbolsRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+	display: none;	
+}
+
+body {
+	font-family: 'Abel', sans-serif;
+}
+
+.disabled {
+	opacity: .5;
+}
+
+.table {
+	display: table !important;
+}
+
+.table-row {
+	display: table-row !important;
+}
+
+.table-cell {
+	display: table-cell !important;
+}
+
+	ul.nav li {
+		background: rgba(000,000,000,.05);
+		display: block;
+		text-align: center;
+	}
+	
+	ul.big li {
+		font-size: 20px;
+		line-height: 20px;
+		margin: 10px;
+		padding: 20px;
+	}
+
+	input.search {
+		background: none;
+		border: 1px solid rgba(000,000,000,.5);
+		border-radius: 10px;
+		display: block;
+		font-size: 20px;
+		line-height: 20px;
+		margin: 10px;
+		padding: 10px;
+		box-sizing: border-box;
+	}

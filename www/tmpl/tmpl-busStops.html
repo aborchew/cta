@@ -1,0 +1,9 @@
+<div class="app-container">
+	
+	<input class="search" type="text" name="search" ng-model="search" placeholder="Search"/>
+	
+	<ul class="nav big buses">
+		<li ng-repeat="(key,val) in getBusStops() | filter:search" ng-tap="navigate('/bus/stops/{{val.stopId}}')">{{val.stopName}}</li>
+	</ul>
+		
+</div>
