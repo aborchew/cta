@@ -77,6 +77,16 @@ body {
 				box-shadow: none;
 				color: 
 			}
+			
+			header .clear-search {
+				display: block;
+				position: absolute;
+				right:11px;
+				top: 11px;
+				background: rgba(179,221,242,1);
+				padding: 10px;
+				line-height: 18px;
+			}
 
 		div.error {
 			width: 250px;
@@ -118,9 +128,40 @@ body {
 		border-top: 1px solid rgba(94,161,194,1);
 	}
 	
+	ul.big.grid {
+		overflow: hidden;
+		border-top: 1px solid rgba(94,161,194,1);
+		border-bottom: none;
+	}
+	
+	ul.big.grid li {
+		float: left;
+		width: 25%;
+		height: 80px;
+		border: none;
+		padding: 5px;
+		box-sizing: border-box;
+	}
+	
 		ul.big li div {
 			position: absolute;
 			text-align: center;
+		}
+		
+		ul.big.grid li div.route {
+			position: absolute;
+			height: auto;
+			width: auto;
+			top: 5px;
+			right: 5px;
+			bottom: 5px;
+			left: 5px;
+			line-height: 70px;
+		}
+		
+		ul.big.grid li div.content,
+		ul.big.grid li div.next {
+			display: none;
 		}
 		
 		ul.big li div.label {

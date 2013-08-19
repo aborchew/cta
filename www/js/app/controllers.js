@@ -21,7 +21,7 @@ cta.controller("cta",function($scope,$http) {
 });
 
 cta.controller("busRoutes",function($rootScope,$scope,$http) {
-	
+	$rootScope.prefs.routeView = 'grid';
 });
 
 cta.controller("busStops",function($rootScope,$scope,$http) {
