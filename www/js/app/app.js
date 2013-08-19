@@ -36,6 +36,9 @@ var cta = angular.module('cta', [])
 	
 		$rootScope.busStops = {};
 		$rootScope.busDirections = {};
+		$rootScope.prefs = {
+			showAllRoutes : 'yes'
+		}
 	
 		$rootScope.navigate = function(newRoute) {
 			$location.path(newRoute);
@@ -50,7 +53,6 @@ var cta = angular.module('cta', [])
 		}
 		
 		$rootScope.getRoute = function() {
-			console.log($route.current.params.routeId);
 			return $route.current.params.routeId;
 		}
 		
@@ -72,7 +74,14 @@ var cta = angular.module('cta', [])
 		}
 		
 		$rootScope.getPredictions = function() {
-			return $rootScope.predictions;
+			if($rootScope.prefs.showAllRoutes == 'yes') {
+				return $rootScope.predictions; 
+			} else {
+				return $filter('filter')($rootScope.predictions,function(prediction){
+					if (prediction.routeId == $rootScope.getRoute()) { return true }
+					else { return false; };
+				})
+			}
 		}
 		
 		$rootScope.getTimeDisparity = function(now,then) {
@@ -94,6 +103,10 @@ var cta = angular.module('cta', [])
 			);			
 
 			return Math.round((thenDate-nowDate)/60000);
+		}
+		
+		$rootScope.favorite = function() {
+			this.val.favorite = !this.val.favorite;
 		}
 		
 	});

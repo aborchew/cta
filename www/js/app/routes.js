@@ -1,12 +1,14 @@
 cta
 	.config(['$routeProvider', function($routeProvider) {
 	
-		$routeProvider.when(
+		$routeProvider/*
+.when(
 	  	'/home', {
 	  		templateUrl: 'tmpl/tmpl-app.html',
 	  		controller: 'cta'
 	  	}
-	  ).when(
+	  )
+*/.when(
 	  	'/bus/routes', {
 	  		templateUrl: 'tmpl/tmpl-busRoutes.html',
 	  		controller: 'busRoutes',
@@ -23,7 +25,7 @@ cta
 	  		}
 	  	}
 	  ).when(
-	  	'/bus/stops/:stopId', {
+	  	'/bus/routes/:routeId/:stopId', {
 	  		templateUrl: 'tmpl/tmpl-busStop.html',
 	  		controller: 'busStop',
 	  		resolve: {
@@ -31,7 +33,7 @@ cta
 	  		}
 	  	}
 	  ).otherwise({ 
-	  	redirectTo: '/home'
+	  	redirectTo: '/bus/routes'
 	  });
 	
 	}])

@@ -25,9 +25,9 @@ cta.controller("busRoutes",function($rootScope,$scope,$http) {
 });
 
 cta.controller("busStops",function($rootScope,$scope,$http) {
-	
+
 });
 
 cta.controller("busStop",function($rootScope,$scope,$http) {
-	
+	$rootScope.prefs.showAllRoutes = 'yes';
 });

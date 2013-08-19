@@ -1,15 +1,51 @@
 <div class="app-container">
+
+	<header>
+<!--
+		<cta-search
+			placeholder="Search {{getBusRoutes().length}} Bus Routes"
+			ng-model="search">
+		</cta-search>
+-->
+		<label for="allRoutes" ng-class="{'selected':prefs.showAllRoutes == 'yes'}">
+			All Buses
+			<input id="allRoutes" ng-model="prefs.showAllRoutes" value="yes" type="radio" name="toggleRoutes"/>
+		</label>
+		<label for="only{{getRoute()}}" ng-class="{'selected':prefs.showAllRoutes == 'no'}">
+			{{getRoute()}} Bus Only
+			<input id="only{{getRoute()}}" ng-model="prefs.showAllRoutes" value="no" type="radio" name="toggleRoutes"/>
+		</label>
+		
+	</header>
 	
 	<ul class="nav big buses">
-		<li ng-repeat="(key,val) in getPredictions()" ng-tap="navigate('/bus/stops/{{val.stopId}}')">
-			<h1>{{val.routeId}}</h1>
-			<h2>{{val.routeDir}} to {{val.destination}}</h2>
-<!--
-			<p>local time: {{val.timestamp}}</p>
-			<p>predicted arrival time: {{val.predictedTime}}</p>
--->
-			<p>Arriving in: {{getTimeDisparity(val.timestamp,val.predictedTime)}} minutes</p>
+		<li ng-repeat="(key,val) in getPredictions()" ng-tap="expand()">			
+			<div class="label route">
+				{{val.routeId}}
+			</div>
+			<div class="content center">
+				{{val.routeDir}} to {{val.destination}}
+			</div>
+			<ng-switch on="getTimeDisparity(val.timestamp,val.predictedTime)">
+				<div class="label prediction" ng-switch-when="0">NOW</div>
+				<div class="label prediction" ng-switch-default>				
+					<span class="count">{{getTimeDisparity(val.timestamp,val.predictedTime)}}</span>
+					<span class="unit">minutes</span>
+				</div>
+			</ng-switch>
 		</li>
 	</ul>
+	
+	<div class="error" ng-show="getPredictions().length == 0">
+		<p>
+			There are no incoming {{getRoute()}} buses at this time.<br/>Better grab a cab!
+		</p>
+		<div class="error-flag">
+			<span class="icon-sad"></span>
+			<span class="icon-sad"></span>
+			<span class="icon-sad"></span>
+			<span class="icon-sad"></span>
+		</div>
+	</div>
 		
 </div>

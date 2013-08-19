@@ -66,3 +66,25 @@ cta.directive('ctaSearch',function() {
 	  }
 	};
 });
+
+cta.directive('makeTwoLinesIfNeeded',function($timeout) {
+  return {
+  	scope: false,
+  	restrict: 'A',
+	  compile: function(sc,el,trans) {
+	  	return {
+		  	pre: function preLink(sc,el,at,co){
+					
+		  	},
+		  	post: function postLink(sc,el,at,co){
+			  	$timeout(function(){
+			  		var target = $(el[0])[at.makeTwoLinesIfNeeded.split('|')[0]](at.makeTwoLinesIfNeeded.split('|')[1]);
+			  		if($(el[0]).height() > target.height()) {
+				  		$(el[0]).addClass(at.makeTwoLinesIfNeeded.split('|')[2]);
+			  		}
+			  	},0);
+		  	}
+	  	}
+	  }
+	};
+});

@@ -1,0 +1,126 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype'),
+		url('fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-star, .icon-home, .icon-connection, .icon-stack, .icon-coin, .icon-location, .icon-map, .icon-map-2, .icon-clock, .icon-clock-2, .icon-alarm, .icon-undo, .icon-spinner, .icon-happy, .icon-sad, .icon-warning, .icon-info, .icon-close, .icon-arrow-right, .icon-radio-unchecked, .icon-checkbox-unchecked, .icon-checkbox-checked, .icon-wrench, .icon-location-2, .icon-target, .icon-grid, .icon-list, .icon-arrow-right-2, .icon-arrow-left {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-star:before {
+	content: "\2a";
+}
+.icon-home:before {
+	content: "\48";
+}
+.icon-connection:before {
+	content: "\57";
+}
+.icon-stack:before {
+	content: "\23";
+}
+.icon-coin:before {
+	content: "\24";
+}
+.icon-location:before {
+	content: "\50";
+}
+.icon-map:before {
+	content: "\4d";
+}
+.icon-map-2:before {
+	content: "\6d";
+}
+.icon-clock:before {
+	content: "\63";
+}
+.icon-clock-2:before {
+	content: "\43";
+}
+.icon-alarm:before {
+	content: "\41";
+}
+.icon-undo:before {
+	content: "\42";
+}
+.icon-spinner:before {
+	content: "\52";
+}
+.icon-happy:before {
+	content: "\29";
+}
+.icon-sad:before {
+	content: "\28";
+}
+.icon-warning:before {
+	content: "\21";
+}
+.icon-info:before {
+	content: "\69";
+}
+.icon-close:before {
+	content: "\58";
+}
+.icon-arrow-right:before {
+	content: "\3e";
+}
+.icon-radio-unchecked:before {
+	content: "\38";
+}
+.icon-checkbox-unchecked:before {
+	content: "\3a";
+}
+.icon-checkbox-checked:before {
+	content: "\39";
+}
+.icon-wrench:before {
+	content: "\53";
+}
+.icon-location-2:before {
+	content: "\4c";
+}
+.icon-target:before {
+	content: "\4f";
+}
+.icon-grid:before {
+	content: "\27";
+}
+.icon-list:before {
+	content: "\47";
+}
+.icon-arrow-right-2:before {
+	content: "\4e";
+}
+.icon-arrow-left:before {
+	content: "\3c";
+}

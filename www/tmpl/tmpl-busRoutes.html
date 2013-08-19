@@ -5,6 +5,16 @@
 			placeholder="Search {{getBusRoutes().length}} Bus Routes"
 			ng-model="search">
 		</cta-search>
+		<div class="view-select">
+<!--
+			<span ng-tap="routeView('list')">
+				<span class="icon-list"></span>
+			</span>
+			<span ng-tap="routeView('list')">
+				<span class="icon-list"></span>
+			</span>
+-->
+		</div>
 	</header>
 	
 	<ul class="nav big buses">
@@ -13,13 +23,13 @@
 			ng-tap="navigate('/bus/routes/{{val.routeId}}')"
 		>
 			<div class="label route">
-				{{getRoute()}}
+				{{val.routeId}}
 			</div>
 			<div class="content center">
 				{{val.routeName}}
 			</div>
 			<div class="label next">
-				<span class="icon-arrow-right"></span>
+				<span class="icon-arrow-right-2"></span>
 			</div>
 		</li>
 	</ul>

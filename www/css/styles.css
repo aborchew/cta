@@ -28,14 +28,12 @@ body {
 
 	header {
 		display: block;
-		top: 0;
-		right: 0;
-		bottom: auto;
-		left: 0;
 		height: auto;
 		background: white;
 		z-index: 999;
-		padding: 10px;
+		padding: 10px 10px 0 10px;
+		clear: both;
+		overflow: hidden;
 	}
 	
 		header label {
@@ -45,13 +43,13 @@ body {
 			box-sizing: border-box;
 			text-align: center;
 			line-height: 30px;
-			margin: 10px 0;
 			font-weight: 700;
 			color: rgba(179,221,242,1);
 			border-bottom: 5px solid rgba(255,255,255,1);
 			border-top: 5px solid rgba(255,255,255,1);
 			text-transform: uppercase;
 			letter-spacing: 2px;
+			margin: 0 0 10px 0;
 			text-shadow: 1px 1px 1px rgba(000,000,000,.25);
 		}
 		
@@ -74,8 +72,33 @@ body {
 				display: block;
 		    box-sizing: border-box;
 				border: 1px solid rgba(94,161,194,1);
-				margin: 0;
+				margin: 0 0 10px 0;
+				border-radius: 0;
+				box-shadow: none;
+				color: 
 			}
+
+		div.error {
+			width: 250px;
+			margin: 0 auto;
+			text-align: center;
+		}
+			
+		div.error p {
+			font-size: 14px;
+			line-height: 20px;
+			padding: 30px 0;
+			font-weight: 300;
+		}
+			
+		div.error-flag {
+			border-top: 30px solid rgba(179,221,242,1);
+			border-bottom: 30px solid rgba(179,221,242,1);
+			line-height: 80px;
+			font-size: 30px;
+			color: rgba(219,13,0,1);
+			letter-spacing: 7px;
+		}
 
 	ul.nav {
 		border-bottom: 1px solid rgba(94,161,194,1);
@@ -102,33 +125,73 @@ body {
 		
 		ul.big li div.label {
 			width: 60px;
-		}
-		
-		ul.big li div.content {
-			
-		}
-		
-		ul.big li div.route {
+			height: 60px;
+			line-height: 60px;
 			left: 0;
 			right: auto;
 			background: rgba(179,221,242,1);
 			font-weight: 700;
 			color: rgba(255,255,255,1);
-			text-shadow: 1px 1px 2px  rgba(000,000,000,.5);
+			text-shadow: 1px 1px 2px rgba(000,000,000,.25);
 		}
 		
-		ul.big li div.next {
+		ul.big li div.content {
+			height: auto;
+			font-size: 14px;
+		}
+		
+		ul.big li div.route {
+
+		}
+		
+		ul.big li div.favorite {
+			font-size: 30px;
+		}
+		
+		ul.big li.favorite div.favorite {
+			color: rgba(219,13,0,1); 
+			text-shadow: 0px 0px 20px rgba(255,255,255,1);
+		}
+		
+		ul.big li div.next,
+		ul.big li div.prediction {
 			left: auto;
 			right: 0;
-			line-height: 55px;
-			color: rgba(219,13,0,1);
+			color: rgba(179,221,242,1);
+			background: none;
 		}
+		
+		ul.big li div.prediction {
+			color: rgba(219,13,0,1);
+			font-size: 25px;
+		}
+		
+			ul.big li div.prediction span {
+				float: left;
+				clear: both;
+				width: 60px;
+			}
+		
+			ul.big li div.prediction span.count {
+				line-height: 50px;
+				font-size: 30px;
+				margin: -2px 0 -5px 0;
+			}
+			
+			ul.big li div.prediction span.unit {
+				line-height: 10px;
+				font-size: 10px;
+				text-transform: uppercase;
+			}
 		
 		ul.big li div.center {
 			font-weight: 300;
 			left: 70px;
 			right: 70px;
-			top: 0;
-			bottom: 0;
 			text-align: left;
+		}
+		
+		ul.big li div.center.two-lines {
+			line-height: 18px;
+			padding: 12px 0;
 		}
