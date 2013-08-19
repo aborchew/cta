@@ -43,3 +43,26 @@ cta.directive('ngTap',function() {
 	  }
 	};
 });
+
+cta.directive('ctaSearch',function() {
+  return {
+  	scope: {
+	  	ngModel: "@",
+	  	labelBefore: "@",
+	  	labelAfter: "@",
+	  	placeholder: "@"
+  	},
+  	restrict: 'E',
+  	templateUrl: 'tmpl/tmpl-search.html',
+	  compile: function(sc,el,trans) {
+	  	return {
+		  	pre: function preLink(sc,el,at,co){
+
+		  	},
+		  	post: function postLink(sc,el,at,co){
+			  	
+		  	}
+	  	}
+	  }
+	};
+});

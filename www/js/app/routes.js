@@ -78,7 +78,7 @@ cta
 				var parseBusDirections = function(directions) {
 					var tempDirections = [];
 					angular.forEach(directions,function(direction){
-						tempDirections.push(direction['#text'].toLowerCase());
+						tempDirections.push(direction['#text']);
 					});
 					$rootScope.setDirections(tempDirections);
 				}
@@ -103,36 +103,55 @@ cta
 		
 			var getStops = function() {
 				
+				var parseCount = 0;
+				var parsedStops = [];
+				
 				var parseBusStops = function(stops) {
-					var parsedStops = [];
 					angular.forEach(stops,function(stop) {
 						parsedStops.push({
 							lat: stop['lat']['#text'],
 							lon: stop['lon']['#text'],
 							stopId: stop['stpid']['#text'],
-							stopName: stop['stpnm']['#text']
+							stopName: stop['stpnm']['#text'],
+							routeDirection: $rootScope.busDirections.possible[parseCount]
 						})
 					});
+					parseCount ++;
 					if(parsedStops.length > 0) {
-						$rootScope.setBusStops(parsedStops);
-						stopsPromise.resolve(parsedStops);
+						if(parseCount == 2) {
+							$rootScope.setBusStops(parsedStops);
+							stopsPromise.resolve();
+						}
 					}
 				}
 			
 				var stopsPromise = $q.defer();
-				$http(api.getBusStops({'rt':$route.current.params.routeId,'dir':$rootScope.getSelectedDirection()}))
+				$http(api.getBusStops({'rt':$route.current.params.routeId,'dir':$rootScope.busDirections.possible[0]}))
 				.success(function(data){
 					data.contents = api.xmlToJson(data.contents);
 					if(data.contents && data.contents['bustime-response'] && !data.contents['bustime-response']['error'] && data.contents['bustime-response']['stop']) {
 						parseBusStops(data.contents['bustime-response'].stop);
 					} else {
-						stopsPromise.reject('Failed to retrieve bus stops from API');
+//						stopsPromise.reject('Failed to retrieve bus stops from API');
 					}
 				})
 				.error(function(){
-					stopsPromise.reject('Failed to retrieve bus stops from API');
+//					stopsPromise.reject('Failed to retrieve bus stops from API');
 				});
-				
+
+				$http(api.getBusStops({'rt':$route.current.params.routeId,'dir':$rootScope.busDirections.possible[1]}))
+				.success(function(data){
+					data.contents = api.xmlToJson(data.contents);
+					if(data.contents && data.contents['bustime-response'] && !data.contents['bustime-response']['error'] && data.contents['bustime-response']['stop']) {
+						parseBusStops(data.contents['bustime-response'].stop);
+					} else {
+//						stopsPromise.reject('Failed to retrieve bus stops from API');
+					}
+				})
+				.error(function(){
+//					stopsPromise.reject('Failed to retrieve bus stops from API');
+				});
+
 				return stopsPromise.promise;
 				
 			};

@@ -15,7 +15,27 @@ var cta = angular.module('cta', [])
 		
 	})
 	
-	.run(function($rootScope,$timeout,$http,$location,api){
+	.filter('selectedRouteDirection', function($rootScope) {
+	
+	  return function (stops) {
+	
+	    var filter_stops = [];
+	
+	    for (var i = 0; i < stops.length; i++) {
+        if (stops[i].routeDirection === $rootScope.busDirections.selected) {
+          filter_stops.push(stops[i]);
+        }
+	    }
+	
+	    return filter_stops;
+	
+	  }
+	})
+	
+	.run(function($rootScope,$timeout,$http,$location,$filter,$route,api){
+	
+		$rootScope.busStops = {};
+		$rootScope.busDirections = {};
 	
 		$rootScope.navigate = function(newRoute) {
 			$location.path(newRoute);
@@ -29,21 +49,14 @@ var cta = angular.module('cta', [])
 			return $rootScope.busRoutes;
 		}
 		
+		$rootScope.getRoute = function() {
+			console.log($route.current.params.routeId);
+			return $route.current.params.routeId;
+		}
+		
 		$rootScope.setDirections = function(directions) {
-			$rootScope.possibleDirections = directions;
-			$rootScope.setSelectedDirection($rootScope.getDirections()[0]);
-		}
-		
-		$rootScope.getDirections = function() {
-			return $rootScope.possibleDirections;
-		}
-		
-		$rootScope.setSelectedDirection = function(direction) {
-			$rootScope.selectedDirection = direction;
-		}
-		
-		$rootScope.getSelectedDirection = function() {
-			return $rootScope.selectedDirection;
+			$rootScope.busDirections.possible = directions;
+			$rootScope.busDirections.selected = $rootScope.busDirections.possible[0];
 		}
 		
 		$rootScope.setBusStops = function(stops) {
@@ -51,7 +64,7 @@ var cta = angular.module('cta', [])
 		}
 		
 		$rootScope.getBusStops = function() {
-			return $rootScope.busStops;
+			return $filter('selectedRouteDirection')($rootScope.busStops);
 		}
 		
 		$rootScope.setPredictions = function(predictions) {

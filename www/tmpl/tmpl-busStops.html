@@ -1,9 +1,33 @@
 <div class="app-container">
 	
-	<input class="search" type="text" name="search" ng-model="search" placeholder="Search"/>
+	<header>
+		<cta-search
+			placeholder="Search {{getBusStops().length}} {{busDirections.selected}} Bus Stops"
+			ng-model="search">
+		</cta-search>
+		<label ng-repeat="(key,val) in busDirections.possible" for="{{val}}" ng-class="{'selected':busDirections.selected == val}">
+			{{val}}
+			<input id="{{val}}" ng-model="busDirections.selected" value="{{val}}" type="radio" name="selectedDirection"/>
+		</label>
+	</header>
+	
+	<br clear="both"/>
 	
 	<ul class="nav big buses">
-		<li ng-repeat="(key,val) in getBusStops() | filter:search" ng-tap="navigate('/bus/stops/{{val.stopId}}')">{{val.stopName}}</li>
+		<li
+			ng-repeat="(key,val) in getBusStops() | filter:search"
+			ng-tap="navigate('/bus/stops/{{val.stopId}}')"
+		>			
+			<div class="label route">
+				{{route.current.params.routeId}}
+			</div>
+			<div class="content center">
+				{{val.stopName}}
+			</div>
+			<div class="label next">
+				<span class="icon-arrow-right"></span>
+			</div>
+		</li>
 	</ul>
 		
 </div>
