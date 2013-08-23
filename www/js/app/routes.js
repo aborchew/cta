@@ -108,14 +108,14 @@ cta
 				var parseCount = 0;
 				var parsedStops = [];
 				
-				var parseBusStops = function(stops) {
+				var parseBusStops = function(stops,dir) {
 					angular.forEach(stops,function(stop) {
 						parsedStops.push({
 							lat: stop['lat']['#text'],
 							lon: stop['lon']['#text'],
 							stopId: stop['stpid']['#text'],
 							stopName: stop['stpnm']['#text'],
-							routeDirection: $rootScope.busDirections.possible[parseCount]
+							routeDirection: dir
 						})
 					});
 					parseCount ++;
@@ -132,7 +132,7 @@ cta
 				.success(function(data){
 					data.contents = api.xmlToJson(data.contents);
 					if(data.contents && data.contents['bustime-response'] && !data.contents['bustime-response']['error'] && data.contents['bustime-response']['stop']) {
-						parseBusStops(data.contents['bustime-response'].stop);
+						parseBusStops(data.contents['bustime-response'].stop,$rootScope.busDirections.possible[0]);
 					} else {
 //						stopsPromise.reject('Failed to retrieve bus stops from API');
 					}
@@ -145,7 +145,7 @@ cta
 				.success(function(data){
 					data.contents = api.xmlToJson(data.contents);
 					if(data.contents && data.contents['bustime-response'] && !data.contents['bustime-response']['error'] && data.contents['bustime-response']['stop']) {
-						parseBusStops(data.contents['bustime-response'].stop);
+						parseBusStops(data.contents['bustime-response'].stop,$rootScope.busDirections.possible[1]);
 					} else {
 //						stopsPromise.reject('Failed to retrieve bus stops from API');
 					}

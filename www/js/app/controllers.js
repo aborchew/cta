@@ -21,10 +21,10 @@ cta.controller("cta",function($scope,$http) {
 });
 
 cta.controller("busRoutes",function($rootScope,$scope,$http) {
-	$rootScope.prefs.routeView = 'grid';
+	$rootScope.prefs.routeView = 'list';
 });
 
-cta.controller("busStops",function($rootScope,$scope,$http) {
+cta.controller("busStops",function($rootScope,$scope,$http,$timeout) {
 
 });
 
