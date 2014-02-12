@@ -2,9 +2,9 @@
 
 angular.module('ctaApp')
   .controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    if(isMobile) {
+      $('#status').html('READY! - MOBILE');
+    } else {
+      $('#status').html('READY! - DESKTOP');
+    }
   }]);

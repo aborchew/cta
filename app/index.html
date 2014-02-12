@@ -11,21 +11,29 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/snapjs/snap.css" />
+    <link rel="stylesheet" href="bower_components/angular-snap/angular-snap-only.css" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/theme.yeti.css">
     <!-- endbuild -->
+
   </head>
-  <body ng-app="ctaApp">
+  <body class="bg-info">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container">
+      <div class="snap-drawer" snap-drawer="right" ng-include="'views/menu.html'"></div>
+      <div class="snap-content" snap-content="" snap-options="{disable:'left'}">
+        <button class="btn btn-default menu-btn" snap-toggle="right" snap-dragger="">
+          <span class="glyphicon glyphicon-align-justify"></span>
+        </button>
+        <div ng-view=""></div>
+      </div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -47,17 +55,25 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+        <script src="cordova.js"></script>
+        <script src="bower_components/snapjs/snap.min.js"></script>
+        <script src="bower_components/angular-snap/angular-snap.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/bus.js"></script>
+        <script src="scripts/controllers/train.js"></script>
+        <script src="scripts/controllers/settings.js"></script>
+        <script src="scripts/controllers/favorites.js"></script>
         <!-- endbuild -->
 </body>
 </html>

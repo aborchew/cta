@@ -16,6 +16,9 @@
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
     <name>CTA</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
