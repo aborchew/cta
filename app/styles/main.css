@@ -1963,8 +1963,8 @@ input[type="button"].btn-block {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/glyphicons-halflings-regular.eot");
-  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+  src: url("../bower_components/sass-bootstrap/fonts/glyphicons-halflings-regular.eot");
+  src: url("../bower_components/sass-bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../bower_components/sass-bootstrap/fonts/glyphicons-halflings-regular.woff") format("woff"), url("../bower_components/sass-bootstrap/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../bower_components/sass-bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -4997,3 +4997,22 @@ td.visible-print {
   th.hidden-print,
   td.hidden-print {
     display: none !important; } }
+.navbar-header {
+  z-index: 999;
+  position: absolute;
+  right: 0;
+  left: 0;
+  box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.25);
+  height: 50px; }
+
+.navbar-header .btn {
+  margin: 7px; }
+
+.snap-content {
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.25);
+  margin: 50px 0 0 0;
+  background: white; }
+
+.snap-drawer {
+  padding: 10px;
+  margin: 50px 0 0 0; }
