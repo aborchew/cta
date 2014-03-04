@@ -25,3 +25,7 @@ $icon-font-path: '../bower_components/sass-bootstrap/fonts/';
   padding: 10px;
   margin: 50px 0 0 0;
 }
+
+.panel-heading {
+  overflow: hidden;
+}

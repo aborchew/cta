@@ -8,7 +8,6 @@ angular.module('ctaApp')
     var route
       , routes = []
       , directions = []
-      , stops = []
       , serviceInfo
       , dirCount
       , stopsResolveCount
@@ -104,7 +103,8 @@ angular.module('ctaApp')
         throw new Error('Must specify a Route Direction when creating a new Direction.');
       }
 
-      var dir = spec;
+      var stops
+        , dir = spec;
 
       function refreshStops () {
 
@@ -116,7 +116,7 @@ angular.module('ctaApp')
             stops = [];
             if(data.data.stop && !data.data.error) {
               for(var i = 0, len = data.data.stop.length; i < len; i++) {
-                stops[stops.length] = new Stop(data.data.stop[i]);
+                stops[stops.length] = new Stop(data.data.stop[i],dir);
               }
             }
             def.resolve();
@@ -177,8 +177,56 @@ angular.module('ctaApp')
         throw new Error('Error creating Stop - spec missing.');
       }
 
-      function getArrivalTimes () {
-        return 'blah';
+      var spec = spec;
+      var arrivals = [];
+      var serviceInfo = [];
+
+      function refreshServiceInfo () {
+
+        var def = $q.defer();
+
+        ctaYqlRequest
+          .get('getservicebulletins',{stpid:spec.stpid})
+          .then(function(data){
+            serviceInfo = [];
+            if(data.data.sb) {
+              serviceInfo = new ServiceBulletin(data.data.sb)
+            }
+            def.resolve();
+          });
+
+        return def.promise;
+
+      }
+
+      function refresh () {
+
+        var def = $q.defer()
+
+        ctaYqlRequest
+          .get('getpredictions',{stpid:spec.stpid})
+          .then(function (data) {
+            arrivals = [];
+            var predictions = data.data.prd
+            for (var i = 0, len = predictions.length; i < len; i++) {
+              arrivals[arrivals.length] = new Prediction(predictions[i]);
+            }
+            refreshServiceInfo()
+              .then(function () {
+                def.resolve();
+              })
+          });
+
+          return def.promise;
+
+      }
+
+      function get () {
+        return arrivals;
+      }
+
+      function getServiceInfo () {
+        return serviceInfo;
       }
 
       return {
@@ -186,7 +234,9 @@ angular.module('ctaApp')
         stopName: spec.stpnm,
         lattitude: spec.lat,
         longitude: spec.lon,
-        getArrivalTimes: getArrivalTimes
+        get: get,
+        refresh: refresh,
+        getServiceInfo: getServiceInfo
       }
 
     }
@@ -203,19 +253,8 @@ angular.module('ctaApp')
         serviceBulletinItems[serviceBulletinItems.length] = new ServiceBulletinItem(spec[i]);
       }
 
-      function refresh () {
-
-        var direction = $filter('filter')(route.get(dir),{direction:dir})
-
-        if(direction.length == 1) {
-          direction[0].refreshServiceInfo();
-        }
-
-      }
-
       return {
         route: route,
-        refresh: refresh,
         items: serviceBulletinItems
       }
 
@@ -237,6 +276,58 @@ angular.module('ctaApp')
 
     }
 
+    var Prediction = function (spec) {
+
+      if(!spec) {
+        throw new Error('Cannot generate a prediction with spec.');
+      }
+
+      function getTimeDifference () {
+        var diff;
+        function parseCtaTime(dateSpec) {
+          var dateString = dateSpec.slice(0,4) + '-' + dateSpec.slice(4,6) + '-' + dateSpec.slice(6,8) + ' ' + dateSpec.split(' ')[1];
+          var arr = dateString.split(/[- :]/);
+          return new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4]);
+        }
+        diff = parseCtaTime(spec.prdtm).getTime() - parseCtaTime(spec.tmstmp).getTime();
+        return Math.floor(diff/60000) - 1;
+      }
+
+      function getDist() {
+
+        var miles = Math.floor(parseInt(spec.dstp) / 5280);
+        var units = 'feet';
+        var value = $filter('number')(spec.dstp);
+
+        if(miles >= 1) {
+          units = 'mile';
+          value = miles;
+          if(miles > 1) {
+            units = 'miles';
+          }
+        }
+
+        return {
+          value: value,
+          unit: units
+        }
+      }
+
+      return {
+        destName: spec.des,
+        distance: getDist(),
+        type: spec.typ,
+        arrivalTime: spec.prdtm,
+        stopName: spec.stpnm,
+        vehicleId: spec.vid,
+        timestamp: spec.tmstmp,
+        arrivesIn: getTimeDifference(),
+        routeId: spec.rt,
+        routeDirection: spec.rtdir
+      }
+
+    }
+
     function findRoute (spec) {
 
       if(!spec) {
@@ -254,6 +345,10 @@ angular.module('ctaApp')
     }
 
     function setRoutes (spec) {
+
+      if(!spec) {
+        throw new Error('Cannot set Routes without spec');
+      }
 
       routes = [];
       for(var i = 0, len = spec.length; i < len; i++) {

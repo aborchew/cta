@@ -6,6 +6,7 @@ angular.module('ctaApp', [
   'ngSanitize',
   'snap'
 ])
+
   .config(function ($routeProvider) {
 
     $routeProvider
@@ -25,9 +26,13 @@ angular.module('ctaApp', [
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
       })
-      .when('/bus/routes/:route', {
+      .when('/bus/routes/:route/stops', {
         templateUrl: 'views/cta.bus.routes.route.html',
         controller: 'BusRoutesRouteCtrl'
+      })
+      .when('/bus/routes/:route/stops/:stop/:direction', {
+        templateUrl: 'views/cta.bus.stops.stop.html',
+        controller: 'BusStopsStopCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -38,5 +43,9 @@ angular.module('ctaApp', [
   .run(function ($rootScope) {
 
     $rootScope.showBulletins = true;
+
+    $rootScope.back = function () {
+      window.history.back();
+    }
 
   })

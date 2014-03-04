@@ -8,6 +8,7 @@ angular.module('ctaApp')
     $scope.route = ctaBusRoutes.get(routeId);
     $scope.directions = [];
     $scope.activeDirection = 0;
+    $scope.stops = [];
 
     $scope.toggleDirection = function () {
       if($scope.activeDirection+1 < $scope.directions.length) {
