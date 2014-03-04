@@ -38,20 +38,27 @@ angular.module('ctaApp')
             dirCount = directions.length;
             stopsResolveCount = 0;
             serviceResolveCount = 0;
-            for(var i = 0; i < dirCount; i++) {
-              directions[i]
-                .refreshStops()
-                .then(function(){
-                  stopsResolveCount += 1;
-                  checkSum();
-                })
-              directions[i]
-                .refreshServiceInfo()
-                .then(function(){
-                  serviceResolveCount += 1;
-                  checkSum();
-                })
-            }
+            ctaYqlRequest
+              .get('getpatterns',{rt:spec.rt})
+              .then(function (data) {
+                for(var i = 0; i < dirCount; i++) {
+                  var ptrn = $filter('filter')(data.data.ptr,{rtdir:directions[i].direction})[0]
+                  directions[i]
+                    .refreshStops()
+                    .then(function(){
+                      stopsResolveCount += 1;
+                      checkSum();
+                    });
+                  directions[i]
+                    .refreshServiceInfo()
+                    .then(function(){
+                      serviceResolveCount += 1;
+                      checkSum();
+                    })
+                  directions[i]
+                    .pattern.set(ptrn);
+                }
+              })
           });
 
         return def.promise;
@@ -104,7 +111,9 @@ angular.module('ctaApp')
       }
 
       var stops
-        , dir = spec;
+        , dir = spec
+        , pattern = {}
+        ;
 
       function refreshStops () {
 
@@ -160,9 +169,26 @@ angular.module('ctaApp')
 
       }
 
+      function setPattern (spec) {
+
+        pattern = new Pattern(spec);
+
+      }
+
+      function getPattern () {
+
+        return pattern;
+
+      }
+
       return {
         direction: dir,
         routeId: route.routeId,
+        pattern: {
+          get: getPattern,
+          set: setPattern
+        },
+        setPattern: setPattern,
         refreshStops: refreshStops,
         refreshServiceInfo: refreshServiceInfo,
         getStops: getStops,
@@ -272,6 +298,46 @@ angular.module('ctaApp')
         priority: spec.prty,
         subject: spec.sbj,
         brief: spec.brf
+      }
+
+    }
+
+    var Pattern = function (spec) {
+
+      if(!spec) {
+        throw new Error('Cannot create Pattern without spec');
+      }
+
+      var waypoints = [];
+
+      for(var i = 0, len = spec.pt.length; i < len; i++) {
+        waypoints[waypoints.length] = new Waypoint(spec.pt[i]);
+      }
+
+      return {
+        length: spec.ln,
+        pid: spec.pid,
+        direction: spec.rtdir,
+        waypoints: waypoints
+
+      }
+
+    }
+
+    var Waypoint = function (spec) {
+
+      if(!spec) {
+        throw new Error('Cannot create Waypoint without spec');
+      }
+
+      return {
+        lattitude: spec.lat,
+        longitude: spec.lon,
+        distance: spec.pdist,
+        sequence: spec.seq,
+        stopId: spec.stpid,
+        stopName: spec.stpnm,
+        type: spec.typ,
       }
 
     }
