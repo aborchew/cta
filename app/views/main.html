@@ -1,1 +1,55 @@
-<p>This is the Main view</p>
+<h3>CTA Bus Tracker</h3>
+
+<tabset>
+
+  <tab heading="Map" select="loadMap()">
+
+    <div id="map" class="container-fluid" style="height:360px"></div>
+
+  </tab>
+
+  <tab heading="Routes">
+
+    <br/>
+
+    <h4>
+
+      Refine:&nbsp;
+
+      <input type="text" class="form-control" placeholder="Id" ng-model="search.id" style="width:40px; display:inline-block;">
+      <input type="text" class="form-control" placeholder="Route Names" ng-model="search.name" style="width:200px; display:inline-block;">
+
+      <span class="pull-right">
+        Order By:&nbsp;
+        <span class="btn-group">
+          <button type="button" class="btn btn-default" ng-class="{'btn-primary active':routeSort == parseInt(id)}" ng-click="routeSort = parseInt(id)">Route Number</button>
+          <button type="button" class="btn btn-default" ng-class="{'btn-primary active':routeSort == 'name'}" ng-click="routeSort = 'name'">Route Name</button>
+        </span>
+      </span>
+
+    </h4>
+
+    <hr/>
+
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="route in routes | orderBy:routeSort | filter:search">
+        <h4>{{route.id}}&nbsp;<small>{{route.name}}</small></h4>
+      </li>
+    </ul>
+
+  </tab>
+
+  <tab heading="Favorites">
+
+  </tab>
+
+</tabset>
+
+
+
+
+
+
+
+
+

@@ -52,3 +52,12 @@ Terminating in response to SpringBoard's termination.
 2014-03-03 20:56:21.611 CTA Transit Tracker[87552:a0b] Unlimited access to network resources
 2014-03-03 20:56:21.755 CTA Transit Tracker[87552:a0b] Resetting plugins due to page load.
 2014-03-03 20:56:22.158 CTA Transit Tracker[87552:a0b] Finished load of: file:///Users/aborche/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6A89334C-D864-4F6E-9319-15FFB088B09D/CTA%20Transit%20Tracker.app/www/index.html#/
+2014-03-16 16:08:12.951 Bus Tracker[63322:a0b] Multi-tasking -> Device: YES, App: YES
+2014-03-16 16:08:13.103 Bus Tracker[63322:a0b] Unlimited access to network resources
+2014-03-16 16:08:13.122 Bus Tracker[63322:a0b] Fix applied for database locations?: YES
+2014-03-16 16:08:16.775 Bus Tracker[63322:a0b] Resetting plugins due to page load.
+2014-03-16 16:08:17.964 Bus Tracker[63322:a0b] Finished load of: file:///Users/aborche/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/1394689F-6585-4E7E-B502-76597C41C483/Bus%20Tracker.app/www/index.html#/
+2014-03-16 16:12:02.619 Bus Tracker[64903:a0b] Multi-tasking -> Device: YES, App: YES
+2014-03-16 16:12:02.625 Bus Tracker[64903:a0b] Unlimited access to network resources
+2014-03-16 16:12:02.787 Bus Tracker[64903:a0b] Resetting plugins due to page load.
+2014-03-16 16:12:05.668 Bus Tracker[64903:a0b] Finished load of: file:///Users/aborche/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/98209D11-6944-4EAE-9EF5-B60FED6456C0/Bus%20Tracker.app/www/index.html#/

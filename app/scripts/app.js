@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('ctaApp', [
-  'ngRoute',
-  'ui.bootstrap',
-  'ngSanitize',
-  'snap'
+  'ngRoute'
+  , 'ui.bootstrap'
+  , 'firebase'
 ])
 
   .config(function ($routeProvider) {
@@ -12,27 +11,12 @@ angular.module('ctaApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/bus/routes', {
-        templateUrl: 'views/cta.bus.routes.html',
-        controller: 'busRoutesCtrl'
-      })
-      .when('/favorites', {
-        templateUrl: 'views/favorites.html',
-        controller: 'FavoritesCtrl'
-      })
-      .when('/settings', {
-        templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl'
-      })
-      .when('/bus/routes/:route/stops', {
-        templateUrl: 'views/cta.bus.routes.route.html',
-        controller: 'BusRoutesRouteCtrl'
-      })
-      .when('/bus/routes/:route/stops/:stop/:direction', {
-        templateUrl: 'views/cta.bus.stops.stop.html',
-        controller: 'BusStopsStopCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          routes: function ($http) {
+            return $http.get('https://ctabustracker.firebaseio.com/routes.json');
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
@@ -41,11 +25,5 @@ angular.module('ctaApp', [
   })
 
   .run(function ($rootScope) {
-
-    $rootScope.showBulletins = true;
-
-    $rootScope.back = function () {
-      window.history.back();
-    }
 
   })
